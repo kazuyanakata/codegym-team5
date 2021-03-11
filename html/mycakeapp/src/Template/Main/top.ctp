@@ -1,12 +1,12 @@
-<?= $this->HTML->css('slick') ?>
-<?= $this->HTML->css('slick-theme') ?>
-<?= $this->HTML->css('top') ?>
+<?= $this->Html->css('slick') ?>
+<?= $this->Html->css('slick-theme') ?>
+<?= $this->Html->css('top') ?>
 <?php if (!empty($slideshowPictures)) : ?>
   <div class="slideshow">
     <ul class="slick-slider">
       <?php foreach ($slideshowPictures as $slideshowPicture) : ?>
         <li class="slick-slide slick-current slick-active">
-          <?= $this->HTML->image('slideshow/' . $slideshowPicture['picture_name'], ['class' => 'slideshow-pic']) ?>
+          <?= $this->Html->image('slideshow/' . $slideshowPicture['picture_name'], ['class' => 'slideshow-pic']) ?>
         </li>
       <?php endforeach; ?>
     </ul>
@@ -19,10 +19,10 @@
   </div>
   <div class="movie-list">
     <?php foreach ($moviePictures as $moviePicture) : ?>
-      <?= $this->HTML->image('movies_top/' . $moviePicture['top_picture_name'], ['class' => 'movie-top-pic']) ?>
+      <?= $this->Html->image('movies_top/' . $moviePicture['top_picture_name'], ['class' => 'movie-top-pic']) ?>
     <?php endforeach; ?>
   </div>
-  <?= $this->HTML->link('詳しく見る', '#', ['class' => 'button normal-button back-orange']) ?>
+  <?= $this->Html->link('詳しく見る', '#', ['class' => 'button normal-button back-orange']) ?>
 </div>
 <div class="discounts">
   <div class="subtitle">
@@ -31,11 +31,11 @@
   </div>
   <div class="discount-list">
     <?php foreach ($discountPictures as $discountPicture) : ?>
-      <?= $this->HTML->image('discounts/' . $discountPicture['picture_name'], ['class' => 'discount-pic']) ?>
+      <?= $this->Html->image('discounts/' . $discountPicture['picture_name'], ['class' => 'discount-pic']) ?>
     <?php endforeach; ?>
   </div>
   <?= $this->HTML->link('詳しく見る', '#', ['class' => 'button normal-button back-orange']) ?>
 </div>
-<?= $this->HTML->script('jquery.min') ?>
-<?= $this->HTML->script('slick.min') ?>
-<?= $this->HTML->script('top') ?>
+<?= $this->Html->script('jquery.min') ?>
+<?= $this->Html->script('slick.min') ?>
+<?= $this->Html->script('top') ?>
