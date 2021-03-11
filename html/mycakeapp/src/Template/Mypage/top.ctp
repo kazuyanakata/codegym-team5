@@ -6,15 +6,15 @@
   </div>
   <div class="flex reserveInfo">
     <p>予約確認</p>
-    <p><?= $this->HTML->link('詳細', ['action' => 'reserved'], ['class' => 'button select-button back-orange']) ?></p>
+    <p><?= $this->Html->link('詳細', ['action' => 'reserved'], ['class' => 'button select-button back-orange']) ?></p>
   </div>
   <div class="flex creditInfo">
     <p>決済情報</p>
-    <p><?= $this->HTML->link('詳細', ['action' => 'checkpayment'], ['class' => 'button select-button back-orange']) ?></p>
+    <p><?= $this->Html->link('詳細', ['action' => 'checkpayment'], ['class' => 'button select-button back-orange']) ?></p>
   </div>
 </div>
 <div class="delete-account">
   <?= $this->Html->link('アカウントを削除', '#'); ?>
 </div>
-<?= $this->HTML->script('jquery.min') ?>
-<?= $this->HTML->script('mypageTop') ?>
+<?= $this->Html->script('jquery.min') ?>
+<?= $this->Html->script('mypageTop') ?>

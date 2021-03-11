@@ -14,7 +14,7 @@ $(window).on('load', () => {
     //選択された日の上映スケジュールが表示される(非同期通信を使用)
     $.ajax({
       type: 'GET',
-      url: 'http://localhost:10380/main/ajax',
+      url: 'http://13.231.187.107:10380/main/ajax',
       dataType: 'json',
       data: { date: $(e.currentTarget).val() },
     }).done((movies) => {
