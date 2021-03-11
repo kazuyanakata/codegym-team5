@@ -33,6 +33,6 @@
     <p>現在予約はありません。</p>
   <?php endif; ?>
 </div>
-<p class="backButton"><?= $this->HTML->link('マイページに戻る', ['action' => 'top'], ['class' => 'button normal-button back-orange']) ?></p>
-<?= $this->HTML->script('jquery.min') ?>
-<?= $this->HTML->script('reserved') ?>
+<p class="backButton"><?= $this->Html->link('マイページに戻る', ['action' => 'top'], ['class' => 'button normal-button back-orange']) ?></p>
+<?= $this->Html->script('jquery.min') ?>
+<?= $this->Html->script('reserved') ?>

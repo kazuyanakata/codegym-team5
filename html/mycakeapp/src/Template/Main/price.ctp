@@ -1,4 +1,4 @@
-<?= $this->HTML->css('price') ?>
+<?= $this->Html->css('price') ?>
 <div class="fees">
     <h3>基本料金</h3>
     <?php foreach ($fees as $fee) : ?>

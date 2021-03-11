@@ -1,4 +1,4 @@
-<?= $this->HTML->css('schedule') ?>
+<?= $this->Html->css('schedule') ?>
 <h1 class="mainTitle">上映スケジュール</h1>
 <ul class="dateList">
   <?php foreach ($dates as $date) : ?>
@@ -45,5 +45,5 @@
     <?php endif; ?>
   <?php endforeach; ?>
 </ul>
-<?= $this->HTML->script('jquery.min') ?>
-<?= $this->HTML->script('schedule') ?>
+<?= $this->Html->script('jquery.min') ?>
+<?= $this->Html->script('schedule') ?>

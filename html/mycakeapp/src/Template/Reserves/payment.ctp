@@ -39,5 +39,5 @@
     ?>
 </div>
 <?php echo $this->Form->end(); ?>
-<?= $this->HTML->script('jquery.min') ?>
-<?= $this->HTML->script('payment') ?>
+<?= $this->Html->script('jquery.min') ?>
+<?= $this->Html->script('payment') ?>

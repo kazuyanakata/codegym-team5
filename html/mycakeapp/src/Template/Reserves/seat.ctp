@@ -1,4 +1,4 @@
-<?= $this->HTML->css('seat') ?>
+<?= $this->Html->css('seat') ?>
 <script>
     let Reserved = JSON.parse('<?= json_encode($Reserved); ?>'); //JSの変数定義にPHP直接出力
 </script>
@@ -16,5 +16,5 @@
     'disabled' => 'true',
 ]); ?>
 <?= $this->Form->end(); ?>
-<?= $this->HTML->script('jquery.min') ?>
-<?= $this->HTML->script('seat') ?>
+<?= $this->Html->script('jquery.min') ?>
+<?= $this->Html->script('seat') ?>
