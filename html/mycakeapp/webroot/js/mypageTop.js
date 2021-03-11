@@ -25,6 +25,6 @@ $(window).on('load', () => {
   });
   //削除ボタンを押した時にdeleteアクションへ遷移する
   $(document).on('click', '.back-gray', () => {
-    location.href = 'http://localhost:10380/mypage/delete';
+    location.href = 'http://13.231.187.107:10380/mypage/delete';
   });
 });

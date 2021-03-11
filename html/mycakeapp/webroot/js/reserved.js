@@ -27,7 +27,7 @@ $(window).on('load', () => {
     //削除ボタンを押した時にdeleteアクションへ遷移する
     $(document).on('click', '.back-gray', () => {
       const params = '?id=' + deletePaymentSchedule + '&column=' + column + '&record=' + record;
-      location.href = 'http://localhost:10380/mypage/canceled'+ params;
+      location.href = 'http://13.231.187.107:10380/mypage/canceled'+ params;
     });
   });
 

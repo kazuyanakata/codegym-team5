@@ -27,7 +27,7 @@ $(window).on('load', () => {
       //削除ボタンを押した時にdeletepaymentアクションへ遷移する
       $('.delete').on('click', () => {
         const cardId = deletePaymentButton.id;
-        location.href = 'http://localhost:10380/mypage/deletepayment?id=' + cardId;
+        location.href = 'http://13.231.187.107:10380/mypage/deletepayment?id=' + cardId;
       });
     });
   };
@@ -39,7 +39,7 @@ $(window).on('load', () => {
   });
   if (paymentButtons.length !== 2) {
     $('.add-payment').on('click', () => {
-      location.href = 'http://localhost:10380/mypage/addpayment';
+      location.href = 'http://13.231.187.107:10380/mypage/addpayment';
     });
   } else {
     $('.add-payment').on('click', () => {
