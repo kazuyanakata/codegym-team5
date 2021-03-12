@@ -4,8 +4,7 @@
 
 <head>
     <?= $this->Html->charset() ?>
-    <!-- Viewファイルの先頭に「$this->assign('title', '好きなタイトル');」でタイトル変更可 -->
-    <title><?= $this->fetch('title') ?></title>
+    <title>QUEL CINEMAS</title>
     <?= $this->Html->css('reset') ?>
     <?= $this->Html->css('movie') ?>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
