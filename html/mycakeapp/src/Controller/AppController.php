@@ -72,7 +72,6 @@ class AppController extends Controller
     }
     public function beforeFilter(Event $event)
     {
-        $this->Security->blackHoleCallback = 'forceSSL';
         $this->Security->requireSecure();
         $this->Auth->allow();
         // 座席予約実装後はコメントを外す
@@ -84,8 +83,5 @@ class AppController extends Controller
             return true;
         }
         return false;
-    }
-    public function forceSSL() {
-        return $this->redirect('https://' . env('SERVER_NAME') . $this->here);
     }
 }
