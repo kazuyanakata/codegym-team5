@@ -53,7 +53,7 @@ class MoviesController extends AppController
             if ($this->Movies->save($movie)) {
                 $this->Flash->success(__('The movie has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The movie could not be saved. Please, try again.'));
         }
@@ -77,7 +77,7 @@ class MoviesController extends AppController
             if ($this->Movies->save($movie)) {
                 $this->Flash->success(__('The movie has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The movie could not be saved. Please, try again.'));
         }
@@ -101,6 +101,6 @@ class MoviesController extends AppController
             $this->Flash->error(__('The movie could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '_ssl' => true]);
     }
 }

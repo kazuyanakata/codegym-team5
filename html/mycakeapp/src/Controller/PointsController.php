@@ -56,7 +56,7 @@ class PointsController extends AppController
             if ($this->Points->save($point)) {
                 $this->Flash->success(__('The point has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The point could not be saved. Please, try again.'));
         }
@@ -82,7 +82,7 @@ class PointsController extends AppController
             if ($this->Points->save($point)) {
                 $this->Flash->success(__('The point has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The point could not be saved. Please, try again.'));
         }
@@ -108,6 +108,6 @@ class PointsController extends AppController
             $this->Flash->error(__('The point could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '_ssl' => true]);
     }
 }

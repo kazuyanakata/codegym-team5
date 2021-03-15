@@ -53,7 +53,7 @@ class PointRatesController extends AppController
             if ($this->PointRates->save($pointRate)) {
                 $this->Flash->success(__('The point rate has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The point rate could not be saved. Please, try again.'));
         }
@@ -77,7 +77,7 @@ class PointRatesController extends AppController
             if ($this->PointRates->save($pointRate)) {
                 $this->Flash->success(__('The point rate has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The point rate could not be saved. Please, try again.'));
         }
@@ -101,6 +101,6 @@ class PointRatesController extends AppController
             $this->Flash->error(__('The point rate could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '_ssl' => true]);
     }
 }

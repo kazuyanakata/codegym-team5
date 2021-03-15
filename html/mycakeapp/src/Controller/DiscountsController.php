@@ -53,7 +53,7 @@ class DiscountsController extends AppController
             if ($this->Discounts->save($discount)) {
                 $this->Flash->success(__('The discount has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The discount could not be saved. Please, try again.'));
         }
@@ -77,7 +77,7 @@ class DiscountsController extends AppController
             if ($this->Discounts->save($discount)) {
                 $this->Flash->success(__('The discount has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The discount could not be saved. Please, try again.'));
         }
@@ -101,6 +101,6 @@ class DiscountsController extends AppController
             $this->Flash->error(__('The discount could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '_ssl' => true]);
     }
 }

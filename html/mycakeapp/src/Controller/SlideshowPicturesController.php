@@ -56,7 +56,7 @@ class SlideshowPicturesController extends AppController
             if ($this->SlideshowPictures->save($slideshowPicture)) {
                 $this->Flash->success(__('The slideshow picture has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The slideshow picture could not be saved. Please, try again.'));
         }
@@ -81,7 +81,7 @@ class SlideshowPicturesController extends AppController
             if ($this->SlideshowPictures->save($slideshowPicture)) {
                 $this->Flash->success(__('The slideshow picture has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The slideshow picture could not be saved. Please, try again.'));
         }
@@ -106,6 +106,6 @@ class SlideshowPicturesController extends AppController
             $this->Flash->error(__('The slideshow picture could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '_ssl' => true]);
     }
 }

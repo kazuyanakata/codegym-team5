@@ -56,7 +56,7 @@ class PaymentsController extends AppController
             if ($this->Payments->save($payment)) {
                 $this->Flash->success(__('The payment has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The payment could not be saved. Please, try again.'));
         }
@@ -83,7 +83,7 @@ class PaymentsController extends AppController
             if ($this->Payments->save($payment)) {
                 $this->Flash->success(__('The payment has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The payment could not be saved. Please, try again.'));
         }
@@ -110,6 +110,6 @@ class PaymentsController extends AppController
             $this->Flash->error(__('The payment could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '_ssl' => true]);
     }
 }

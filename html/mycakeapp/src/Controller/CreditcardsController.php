@@ -56,7 +56,7 @@ class CreditcardsController extends AppController
             if ($this->Creditcards->save($creditcard)) {
                 $this->Flash->success(__('The creditcard has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The creditcard could not be saved. Please, try again.'));
         }
@@ -81,7 +81,7 @@ class CreditcardsController extends AppController
             if ($this->Creditcards->save($creditcard)) {
                 $this->Flash->success(__('The creditcard has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The creditcard could not be saved. Please, try again.'));
         }
@@ -106,6 +106,6 @@ class CreditcardsController extends AppController
             $this->Flash->error(__('The creditcard could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '_ssl' => true]);
     }
 }
