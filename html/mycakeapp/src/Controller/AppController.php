@@ -47,6 +47,7 @@ class AppController extends Controller
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
+        $this->loadComponent('Security');
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Auth', [
             'authorize' => ['Controller' => 'Members'],
@@ -71,9 +72,11 @@ class AppController extends Controller
     }
     public function beforeFilter(Event $event)
     {
+        $this->Security->blackHoleCallback = 'forceSSL';
+        $this->Security->requireSecure();
         $this->Auth->allow();
         // 座席予約実装後はコメントを外す
-        $this->Auth->deny(['action' => 'seat', '_ssl' => true]);
+        $this->Auth->deny('seat');
     }
     public function isAuthorized($member = null)
     {
@@ -81,5 +84,8 @@ class AppController extends Controller
             return true;
         }
         return false;
+    }
+    public function forceSSL() {
+        return $this->redirect('https://' . env('SERVER_NAME') . $this->here);
     }
 }
