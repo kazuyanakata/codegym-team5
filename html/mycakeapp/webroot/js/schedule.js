@@ -14,7 +14,7 @@ $(window).on('load', () => {
     //選択された日の上映スケジュールが表示される(非同期通信を使用)
     $.ajax({
       type: 'GET',
-      url: 'http://13.231.187.107:10380/main/ajax',
+      url: 'https://quel-cinemas.k-nakata.com/main/ajax',
       dataType: 'json',
       data: { date: $(e.currentTarget).val() },
     }).done((movies) => {
