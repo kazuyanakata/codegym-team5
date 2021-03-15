@@ -57,9 +57,9 @@ class AppController extends Controller
                     'finder' => 'Auth',
                 ]
             ],
-            'loginAction' => ['controller' => 'Members', 'action' => 'login'],
-            'loginRedirect' => ['controller' => 'main', 'action' => 'top'],
-            'logoutRedirect' => ['controller' => 'main', 'action' => 'top'],
+            'loginAction' => ['controller' => 'Members', 'action' => 'login', '_ssl' => true],
+            'loginRedirect' => ['controller' => 'main', 'action' => 'top', '_ssl' => true],
+            'logoutRedirect' => ['controller' => 'main', 'action' => 'top', '_ssl' => true],
         ]);
         $member = $this->Auth->user();
         $this->set('member', $member);

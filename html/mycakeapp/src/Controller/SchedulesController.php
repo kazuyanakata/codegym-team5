@@ -56,7 +56,7 @@ class SchedulesController extends AppController
             if ($this->Schedules->save($schedule)) {
                 $this->Flash->success(__('The schedule has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The schedule could not be saved. Please, try again.'));
         }
@@ -82,7 +82,7 @@ class SchedulesController extends AppController
             if ($this->Schedules->save($schedule)) {
                 $this->Flash->success(__('The schedule has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The schedule could not be saved. Please, try again.'));
         }
@@ -108,6 +108,6 @@ class SchedulesController extends AppController
             $this->Flash->error(__('The schedule could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '_ssl' => true]);
     }
 }

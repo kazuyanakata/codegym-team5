@@ -23,7 +23,7 @@ class MypageController extends AppController
         $this->loadModel('Creditcards');
         $member = $this->Auth->user();
         if (empty($member)) {
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
     }
 
@@ -42,19 +42,19 @@ class MypageController extends AppController
     {
         //削除ボタンを押さない限りエラー画面へ遷移する
         if (empty($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] !== 'https://quel-cinemas.k-nakata.com/mypage/top') {
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         $this->viewBuilder()->setLayout('frame-no-title');
         $id = $this->Auth->user('id');
         $entity = $this->Members->get($id);
         $entity['is_deleted'] = 1;
         if (!($this->Members->save($entity))) {
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         //ログアウト後はdeletedアクションへ遷移させる
         $_SESSION['deleted'] = 1;
         $this->Auth->logout();
-        return $this->redirect(['controller' => 'members', 'action' => 'deleted']);
+        return $this->redirect(['controller' => 'members', 'action' => 'deleted', '_ssl' => true]);
     }
 
     public function reserved()
@@ -105,7 +105,7 @@ class MypageController extends AppController
         $this->viewBuilder()->setLayout('frame-no-title');
         //URL直打ち対策
         if (empty($this->referer(null, true)) || $this->referer(null, true) !== '/mypage/reserved') {
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         $memberId = $this->Auth->user('id');
         $scheduleId = $this->request->query['id'];
@@ -130,7 +130,7 @@ class MypageController extends AppController
         $isColumnExist = in_array($column, $reservedColumn);
         $isRecordExist = in_array($record, $reservedRecord);
         if ($isScheduleIdExist === false || $isColumnExist === false || $isRecordExist === false || !($this->Payments->exists($mainKey))) {
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         //各テーブルの該当箇所を抽出
         $payment = $this->Payments->find('ApplyEntity', ['mainKey' => $mainKey]);
@@ -148,19 +148,19 @@ class MypageController extends AppController
             $member['total_point'] -= $plusPoint[0]['point'];
             $plusPoint[0]['is_cancelled'] = 1;
             if (!($this->Points->save($plusPoint[0]))) {
-                return $this->redirect(['controller' => 'error']);
+                return $this->redirect(['controller' => 'error', '_ssl' => true]);
             }
         }
         if (!empty($minusPoint[0])) {
             $member['total_point'] += $minusPoint[0]['point'];
             $minusPoint[0]['is_cancelled'] = 1;
             if (!($this->Points->save($minusPoint[0]))) {
-                return $this->redirect(['controller' => 'error']);
+                return $this->redirect(['controller' => 'error', '_ssl' => true]);
             }
         }
         if (!empty($plusPoint[0]) || !empty($minusPoint[0])) {
             if (!($this->Members->save($member))) {
-                return $this->redirect(['controller' => 'error']);
+                return $this->redirect(['controller' => 'error', '_ssl' => true]);
             }
         }
         //該当テーブルのキャンセルフラグを立てる
@@ -168,7 +168,7 @@ class MypageController extends AppController
         $reservationDetail[0]['is_cancelled'] = 1;
         $seatReservation[0]['is_cancelled'] = 1;
         if (!($this->Payments->save($payment[0])) || !($this->ReservationDetails->save($reservationDetail[0])) || !($this->SeatReservations->save($seatReservation[0]))) {
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
     }
     public function checkpayment()
@@ -200,7 +200,7 @@ class MypageController extends AppController
             $encryptedCardId = $this->request->query['id'];
             $cardId = Security::decrypt($encryptedCardId, $securityKey, $securitySalt);
             if ($cardId === false) { //不正なIDの時
-                return $this->redirect(['controller' => 'error']);
+                return $this->redirect(['controller' => 'error', '_ssl' => true]);
             }
             foreach ((array)$cardsInfoOwn as $cardInfoOwn) {
                 if ($cardInfoOwn['id'] === (int)$cardId) {
@@ -208,14 +208,14 @@ class MypageController extends AppController
                 }
             }
             if (empty($cardHolderIsMember)) { //カードがユーザーのものじゃない時
-                return $this->redirect(['controller' => 'error']);
+                return $this->redirect(['controller' => 'error', '_ssl' => true]);
             }
             $entity = $this->Creditcards->get($cardId);
             $previousCardNumber = $entity['card_number'];
         } else { //insertのカード数判定
             $numberOfCardsOwned = count($cardsInfoOwn);
             if ($numberOfCardsOwned === 2) {
-                return $this->redirect(['controller' => 'error']);
+                return $this->redirect(['controller' => 'error', '_ssl' => true]);
             }
         }
         if (!empty($this->request->is('Put'))) { //update
@@ -229,7 +229,7 @@ class MypageController extends AppController
                 $entity["updated_at"] = date("Y/m/d H:i:s");
                 if (empty($cardNumberIsNotUnique) && $this->Creditcards->save($entity)) {
                     $_SESSION['addedpayment'] = 1;
-                    return $this->redirect(['action' => 'addedpayment']);
+                    return $this->redirect(['action' => 'addedpayment', '_ssl' => true]);
                 }
             }
         }
@@ -248,9 +248,9 @@ class MypageController extends AppController
                     $_SESSION['addedpayment'] = 1;
                 }
                 if (isset($_SESSION['checkdetail']) && isset($_SESSION['addedpayment'])) { // 決済方法から来たならセッションがある
-                    return $this->redirect(['controller' => 'reserves', 'action' => 'payment']);
+                    return $this->redirect(['controller' => 'reserves', 'action' => 'payment', '_ssl' => true]);
                 } elseif (!(isset($_SESSION['checkdetail'])) && isset($_SESSION['addedpayment'])) {
-                    return $this->redirect(['action' => 'addedpayment']);
+                    return $this->redirect(['action' => 'addedpayment', '_ssl' => true]);
                 }
             }
         }
@@ -261,7 +261,7 @@ class MypageController extends AppController
     {
         $this->viewBuilder()->setLayout('frame-title');
         if (empty($_SESSION['addedpayment'])) {
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         $this->request->session()->delete('addedpayment');
         $title = "決済情報";
@@ -277,7 +277,7 @@ class MypageController extends AppController
         $cardId = Security::decrypt($encryptedCardId, $securityKey, $securitySalt);
 
         if ($cardId === false) { //不正なIDの時
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         $memberId = $this->Auth->user('id');
         $cardsInfoOwn = $this->Creditcards->find('CardsInfoOwn', ['memberId' => $memberId]);
@@ -287,22 +287,22 @@ class MypageController extends AppController
             }
         }
         if (!($cardHolderIsMember)) {
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
 
         $entity = $this->Creditcards->get($cardId);
         $entity['is_deleted'] = 1;
         if (!($this->Creditcards->save($entity))) {
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         $_SESSION['deletedpayment'] = 1;
-        return $this->redirect(['action' => 'deletedpayment']);
+        return $this->redirect(['action' => 'deletedpayment', '_ssl' => true]);
     }
     public function deletedpayment()
     {
         $this->viewBuilder()->setLayout('frame-title');
         if (empty($_SESSION['deletedpayment'])) {
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         $this->request->session()->delete('deletedpayment');
         $title = "決済情報";

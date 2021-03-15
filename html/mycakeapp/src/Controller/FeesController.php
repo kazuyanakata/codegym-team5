@@ -53,7 +53,7 @@ class FeesController extends AppController
             if ($this->Fees->save($fee)) {
                 $this->Flash->success(__('The fee has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The fee could not be saved. Please, try again.'));
         }
@@ -77,7 +77,7 @@ class FeesController extends AppController
             if ($this->Fees->save($fee)) {
                 $this->Flash->success(__('The fee has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The fee could not be saved. Please, try again.'));
         }
@@ -101,6 +101,6 @@ class FeesController extends AppController
             $this->Flash->error(__('The fee could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '_ssl' => true]);
     }
 }

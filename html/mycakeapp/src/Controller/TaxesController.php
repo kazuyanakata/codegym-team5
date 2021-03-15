@@ -53,7 +53,7 @@ class TaxesController extends AppController
             if ($this->Taxes->save($tax)) {
                 $this->Flash->success(__('The tax has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The tax could not be saved. Please, try again.'));
         }
@@ -77,7 +77,7 @@ class TaxesController extends AppController
             if ($this->Taxes->save($tax)) {
                 $this->Flash->success(__('The tax has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The tax could not be saved. Please, try again.'));
         }
@@ -101,6 +101,6 @@ class TaxesController extends AppController
             $this->Flash->error(__('The tax could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '_ssl' => true]);
     }
 }

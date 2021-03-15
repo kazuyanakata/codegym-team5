@@ -53,7 +53,7 @@ class TheatersController extends AppController
             if ($this->Theaters->save($theater)) {
                 $this->Flash->success(__('The theater has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The theater could not be saved. Please, try again.'));
         }
@@ -77,7 +77,7 @@ class TheatersController extends AppController
             if ($this->Theaters->save($theater)) {
                 $this->Flash->success(__('The theater has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The theater could not be saved. Please, try again.'));
         }
@@ -101,6 +101,6 @@ class TheatersController extends AppController
             $this->Flash->error(__('The theater could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '_ssl' => true]);
     }
 }

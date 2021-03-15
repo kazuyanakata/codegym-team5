@@ -56,7 +56,7 @@ class ReservationDetailsController extends AppController
             if ($this->ReservationDetails->save($reservationDetail)) {
                 $this->Flash->success(__('The reservation detail has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The reservation detail could not be saved. Please, try again.'));
         }
@@ -84,7 +84,7 @@ class ReservationDetailsController extends AppController
             if ($this->ReservationDetails->save($reservationDetail)) {
                 $this->Flash->success(__('The reservation detail has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index', '_ssl' => true]);
             }
             $this->Flash->error(__('The reservation detail could not be saved. Please, try again.'));
         }
@@ -112,6 +112,6 @@ class ReservationDetailsController extends AppController
             $this->Flash->error(__('The reservation detail could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'index', '_ssl' => true]);
     }
 }

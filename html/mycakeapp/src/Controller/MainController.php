@@ -28,7 +28,7 @@ class MainController extends AppController
         session_start();
       }
       $_SESSION['schedule_id'] = $id;
-      return $this->redirect(['controller' => 'reserves', 'action' => 'seat']);
+      return $this->redirect(['controller' => 'reserves', 'action' => 'seat', '_ssl' => true]);
     }
     $week = ['日', '月', '火', '水', '木', '金', '土'];
     $today = Time::now();

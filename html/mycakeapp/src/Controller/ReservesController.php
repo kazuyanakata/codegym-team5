@@ -28,7 +28,7 @@ class ReservesController extends AppController
 
         $member = $this->Auth->user();
         if (empty($member) && $this->request->action !== 'seat') {
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
     }
 
@@ -36,7 +36,7 @@ class ReservesController extends AppController
     {
         //URL直打ち対策
         if (empty($_SESSION['schedule_id'])) {
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         if (!empty($_SESSION['seat'])) { //ticketアクションから戻ってきたときにキャンセルフラグを立てる
             $ExReservation = $this->SeatReservations->find()
@@ -50,7 +50,7 @@ class ReservesController extends AppController
             $ExReservation[0]['is_cancelled'] = '1';
             if (!($this->SeatReservations->save($ExReservation['0']))) {
                 $this->request->session()->delete('seat');
-                return $this->redirect(['controller' => 'error']);
+                return $this->redirect(['controller' => 'error', '_ssl' => true]);
             }
             $this->request->session()->delete('seat');
         }
@@ -74,7 +74,7 @@ class ReservesController extends AppController
         if ($this->request->isPost()) {
             $seatNumber = explode("-", $_POST['seat']);
             if (!empty($Reserved) && in_array($_POST['seat'], $Reserved)) {
-                return $this->redirect(['controller' => 'error']);
+                return $this->redirect(['controller' => 'error', '_ssl' => true]);
             }
             $entity = $this->SeatReservations->newEntity();
             $entity['member_id'] = $this->Auth->user('id');
@@ -89,9 +89,9 @@ class ReservesController extends AppController
                 $_SESSION['seat']['schedule_id'] = $_SESSION['schedule_id'];
                 $_SESSION['seat']['column_number'] = $seatNumber[0];
                 $_SESSION['seat']['record_number'] = $seatNumber[1];
-                $this->redirect(['action' => 'ticket']);
+                $this->redirect(['action' => 'ticket', '_ssl' => true]);
             }
-            $this->redirect(['controller' => 'error']);
+            $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         //シアターファイル名を取得
         $seatDetails = $this->Schedules->get($_SESSION['schedule_id'], [
@@ -110,7 +110,7 @@ class ReservesController extends AppController
         //URL直打ち対策(途中でページを遷移したことによりセッションは残っていた場合も直接遷移させない)
         if (empty($_SESSION['seat']) || $this->referer(null, true) !== '/reserves/seat' && $this->referer(null, true) !== '/reserves/ticket') {
             $this->request->session()->delete('seat');
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         $this->viewBuilder()->setLayout('frame-title');
         $title = 'チケット種別';
@@ -148,10 +148,10 @@ class ReservesController extends AppController
                 $_SESSION['schedule'] = $schedule;
                 $_SESSION['detail'] = $detail;
                 $_SESSION['detail']['fee_id'] = $this->request->data['detail'];
-                return $this->redirect(['controller' => 'reserves', 'action' => 'discount']);
+                return $this->redirect(['controller' => 'reserves', 'action' => 'discount', '_ssl' => true]);
             } elseif (empty($notSelectError) && $isTicketIdExist === false) { //開発者ツールにて$ticketId以外の値に変更して送信した時
                 $this->request->session()->delete('seat');
-                return $this->redirect(['controller' => 'error']);
+                return $this->redirect(['controller' => 'error', '_ssl' => true]);
             }
         }
         $this->set(compact('title', 'detail', 'tickets'));
@@ -167,7 +167,7 @@ class ReservesController extends AppController
             $this->request->session()->delete('seat');
             $this->request->session()->delete('detail');
             $this->request->session()->delete('schedule');
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         $this->viewBuilder()->setLayout('frame-title');
         $title = '割引';
@@ -210,12 +210,12 @@ class ReservesController extends AppController
             if ($isTicketIdExist === true && ($this->request->data['discount'] === '2' || $this->request->data['discount'] === '3' || $this->request->data['discount'] === '0')) {
                 $_SESSION['detail']['discount_id'] = $this->request->data['discount'];
                 $_SESSION['fee'] = $feeTicket;
-                return $this->redirect(['controller' => 'reserves', 'action' => 'checkdetail']);
+                return $this->redirect(['controller' => 'reserves', 'action' => 'checkdetail', '_ssl' => true]);
             } elseif ($isTicketIdExist === false) {
                 $this->request->session()->delete('seat');
                 $this->request->session()->delete('detail');
                 $this->request->session()->delete('schedule');
-                return $this->redirect(['controller' => 'error']);
+                return $this->redirect(['controller' => 'error', '_ssl' => true]);
             }
         }
         $this->set(compact('title', 'detail', 'discounts', 'schedule', 'feeTicket'));
@@ -235,7 +235,7 @@ class ReservesController extends AppController
             $reservationDetails[0]['is_cancelled'] = 1;
             if (!($this->ReservationDetails->save($reservationDetails[0]))) {
                 $this->request->session()->delete('seat');
-                return $this->redirect(['controller' => 'error']);
+                return $this->redirect(['controller' => 'error', '_ssl' => true]);
             }
             $movieDetails = $this->Schedules->find('MovieDetails', ['schedule_id' => $reservationDetails[0]['schedule_id']]);
             $_SESSION['detail'] = [
@@ -264,7 +264,7 @@ class ReservesController extends AppController
             $this->request->session()->delete('detail');
             $this->request->session()->delete('schedule');
             $this->request->session()->delete('fee');
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         $this->viewBuilder()->setLayout('frame-title');
         $detail = $_SESSION['detail'];
@@ -315,7 +315,7 @@ class ReservesController extends AppController
                 $this->request->session()->delete('schedule');
                 $this->request->session()->delete('detail');
                 $this->request->session()->delete('fee');
-                return $this->redirect(['controller' => 'error']);
+                return $this->redirect(['controller' => 'error', '_ssl' => true]);
             }
         }
         $this->set(compact('title', 'detail', 'feeTicket'));
@@ -328,7 +328,7 @@ class ReservesController extends AppController
         $reserve = new ReserveForm(); //validation
 
         if (empty($_SESSION['payment'])) {
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         } else {
             $_SESSION['checkdetail'] = 1;
         }
@@ -336,7 +336,7 @@ class ReservesController extends AppController
         $cardsInfoOwn = $this->Creditcards->find('CardsInfoOwn', ['memberId' => $memberId]);
         if (!($cardsInfoOwn)) {
             //決済新規登録ページへ
-            return $this->redirect(['controller' => 'mypage', 'action' => 'addpayment']);
+            return $this->redirect(['controller' => 'mypage', 'action' => 'addpayment', '_ssl' => true]);
         }
         // カードIDの暗号化 カード下4桁抽出
         $securityKey = Configure::read('key');
@@ -371,7 +371,7 @@ class ReservesController extends AppController
             if ($registeredOrder >= count($cardsInfoOwn)) { //不正なカードの時
                 $this->request->session()->delete('checkdetail');
                 $this->request->session()->delete('payment');
-                return $this->redirect(['controller' => 'error']);
+                return $this->redirect(['controller' => 'error', '_ssl' => true]);
             }
             $useCreditcard = $cardsInfoOwn[$registeredOrder]['id'];
             // ポイント
@@ -379,7 +379,7 @@ class ReservesController extends AppController
             if ($usageOfPoints === 'no_use_point') {
                 $_SESSION['payment']['creditcard_id'] = $useCreditcard;
                 $_SESSION['payment']['use_point'] = 0;
-                return $this->redirect(['action' => 'checkpayment']);
+                return $this->redirect(['action' => 'checkpayment', '_ssl' => true]);
             }
             $usePoint = $this->request->data['use_point'];
             if ($usePoint > $totalOfOwnPoints) {
@@ -389,7 +389,7 @@ class ReservesController extends AppController
             if (empty($TooManyPointsError)) {
                 $_SESSION['payment']['creditcard_id'] = $useCreditcard;
                 $_SESSION['payment']['use_point'] = $usePoint;
-                return $this->redirect(['action' => 'checkpayment']);
+                return $this->redirect(['action' => 'checkpayment', '_ssl' => true]);
             }
         }
         $this->set(compact('title', 'reserve', 'cardsInfoOwn', 'totalOfOwnPoints'));
@@ -401,7 +401,7 @@ class ReservesController extends AppController
         if (empty($_SESSION['payment'])) {
             $this->request->session()->delete('checkdetail');
             $this->request->session()->delete('payment');
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         $fee = $_SESSION['payment']['fee'];
         $screeningStartDate = $this->Schedules->find()->select(['start_date'])->where(['id' => $_SESSION['payment']['schedule_id']])->first()->start_date;
@@ -485,9 +485,9 @@ class ReservesController extends AppController
                 ->select(['total_point'])->where(['id' => $memberId])->first()->total_point;
             $membersEntity['total_point'] = $totalOfOwnPoints - $_SESSION['payment']['use_point'] + $givePoint;
             if ($this->Payments->insert($payments) && $this->Points->saveMany($PointsEntity, [['checkExisting' => false]]) && $this->Members->save($membersEntity)) {
-                return $this->redirect(['action' => 'finished']);
+                return $this->redirect(['action' => 'finished', '_ssl' => true]);
             } else {
-                return $this->redirect(['controller' => 'error']);
+                return $this->redirect(['controller' => 'error', '_ssl' => true]);
             }
         }
         $usePoint = $_SESSION['payment']['use_point'];
@@ -499,7 +499,7 @@ class ReservesController extends AppController
         if (empty($_SESSION['payment'])) {
             $this->request->session()->delete('checkdetail');
             $this->request->session()->delete('payment');
-            return $this->redirect(['controller' => 'error']);
+            return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         $this->request->session()->delete('checkdetail');
         $this->request->session()->delete('payment');
