@@ -107,6 +107,8 @@ class ReservesController extends AppController
 
     public function ticket()
     {
+        print_r($_SESSION);
+        print_r($this->referer(null, true));
         //URL直打ち対策(途中でページを遷移したことによりセッションは残っていた場合も直接遷移させない)
         if (empty($_SESSION['seat']) || $this->referer(null, true) !== '/reserves/seat' && $this->referer(null, true) !== '/reserves/ticket') {
             $this->request->session()->delete('seat');
