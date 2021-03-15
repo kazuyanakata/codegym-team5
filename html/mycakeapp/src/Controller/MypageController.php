@@ -104,7 +104,7 @@ class MypageController extends AppController
     {
         $this->viewBuilder()->setLayout('frame-no-title');
         //URL直打ち対策
-        if (empty($this->referer(null, true)) || $this->referer(null, true) !== '/mypage/reserved') {
+        if (empty($this->referer()) || $this->referer() !== 'https://quel-cinemas.k-nakata.com/mypage/reserved') {
             return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
         $memberId = $this->Auth->user('id');

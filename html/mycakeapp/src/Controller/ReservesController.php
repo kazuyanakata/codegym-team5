@@ -107,12 +107,8 @@ class ReservesController extends AppController
 
     public function ticket()
     {
-        print_r($_SESSION);
-        print_r($this->referer(null, true));
-        print_r($this->referer());
-        print_r($_SERVER['HTTP_REFERER']);
         //URL直打ち対策(途中でページを遷移したことによりセッションは残っていた場合も直接遷移させない)
-        if (empty($_SESSION['seat']) || $this->referer(null, true) !== '/reserves/seat' && $this->referer(null, true) !== '/reserves/ticket') {
+        if (empty($_SESSION['seat']) || $this->referer() !== 'https://quel-cinemas.k-nakata.com/reserves/seat' && $this->referer() !== 'https://quel-cinemas.k-nakata.com/reserves/ticket') {
             $this->request->session()->delete('seat');
             return $this->redirect(['controller' => 'error', '_ssl' => true]);
         }
@@ -167,7 +163,7 @@ class ReservesController extends AppController
             $this->request->session()->delete('checkdetail');
         }
         //URL直打ち対策(途中でページを遷移したことによりセッションは残っていた場合も直接遷移させない)
-        if (!(isset($_SESSION['detail']['fee_id'])) || $this->referer(null, true) !== '/reserves/ticket' && $this->referer(null, true) !== '/reserves/discount') {
+        if (!(isset($_SESSION['detail']['fee_id'])) || $this->referer() !== 'https://quel-cinemas.k-nakata.com/reserves/ticket' && $this->referer() !== 'https://quel-cinemas.k-nakata.com/reserves/discount') {
             $this->request->session()->delete('seat');
             $this->request->session()->delete('detail');
             $this->request->session()->delete('schedule');
@@ -262,7 +258,7 @@ class ReservesController extends AppController
             $_SESSION['fee'] = $this->Fees->get($_SESSION['detail']['fee_id']);
         }
         //直接画面遷移の対応(途中でページを遷移したことによりセッションは残っていた場合も直接遷移させない)
-        $isIllegalReferences = $this->referer(null, true) !== '/reserves/discount' && $this->referer(null, true) !== '/reserves/checkdetail' && $this->referer(null, true) !== '/reserves/payment';
+        $isIllegalReferences = $this->referer() !== 'https://quel-cinemas.k-nakata.com/reserves/discount' && $this->referer() !== 'https://quel-cinemas.k-nakata.com/reserves/checkdetail' && $this->referer() !== 'https://quel-cinemas.k-nakata.com/reserves/payment';
         if (!(isset($_SESSION['detail']['discount_id'])) || $isIllegalReferences) {
             $this->request->session()->delete('seat');
             $this->request->session()->delete('detail');
