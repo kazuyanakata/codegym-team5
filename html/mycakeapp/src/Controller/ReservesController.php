@@ -309,7 +309,7 @@ class ReservesController extends AppController
                 $this->request->session()->delete('schedule');
                 $this->request->session()->delete('detail');
                 $this->request->session()->delete('fee');
-                return $this->redirect(['action' => 'payment']);
+                return $this->redirect(['action' => 'payment', '_ssl' => true]);
             } else {
                 $this->request->session()->delete('seat');
                 $this->request->session()->delete('schedule');
