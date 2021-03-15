@@ -184,7 +184,7 @@ class MembersController extends AppController
             $member = $this->Auth->identify();
             if (!empty($member)) { //認証成功
                 $this->Auth->setUser($member);
-                return $this->redirect($this->Auth->redirectUrl());
+                return $this->redirect($this->Auth->redirectUrl(['_ssl' => true]));
             }
             $AuthCError = 'メールアドレスかパスワードまたはその両方が間違っているようです';
             $this->set(compact('AuthCError'));
