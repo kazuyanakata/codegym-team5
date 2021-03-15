@@ -72,7 +72,6 @@ class AppController extends Controller
     }
     public function beforeFilter(Event $event)
     {
-        $this->Security->requireSecure();
         $this->Auth->allow();
         // 座席予約実装後はコメントを外す
         $this->Auth->deny('seat');
