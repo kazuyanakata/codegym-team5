@@ -75,6 +75,8 @@ class AppController extends Controller
         $this->Auth->allow();
         // 座席予約実装後はコメントを外す
         $this->Auth->deny('seat');
+        $this->Security->validatePost = false;
+        $this->Security->csrfCheck = false;
     }
     public function isAuthorized($member = null)
     {
