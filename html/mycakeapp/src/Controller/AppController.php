@@ -75,8 +75,11 @@ class AppController extends Controller
         $this->Auth->allow();
         // 座席予約実装後はコメントを外す
         $this->Auth->deny('seat');
+        $this->Security->blackHoleCallback = 'blackhole';
         $this->Security->validatePost = false;
         $this->Security->csrfCheck = false;
+    }
+    public function blackhole($type) {
     }
     public function isAuthorized($member = null)
     {
